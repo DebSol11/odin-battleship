@@ -1,4 +1,4 @@
-const Gameboard = require("./Gameboard");
+const Gameboard = require("./gameboard");
 
 describe("Gameboard Class", () => {
   let gameBoard;
