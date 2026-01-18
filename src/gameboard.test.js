@@ -1,11 +1,14 @@
 const Gameboard = require("./Gameboard");
 
-descirbe("Gameboard Class", () => {
-  let gameboard;
+describe("Gameboard Class", () => {
+  let gameBoard;
 
   beforeEach(() => {
-    gameboard = new Gameboard();
+    gameBoard = new Gameboard();
   });
 
-  test("should place ships correctly")
+  test("should place ships correctly", () => {
+    expect(gameBoard.placeShip(1, 1, "horizontal", 3)).tobe(true);
+    expect(gameBoard.placeShip(1, 1, "vertical", 4)).toBe(false); // Overlap
+  });
 });
