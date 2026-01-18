@@ -1,3 +1,5 @@
+const Ship = require("./ship");
+
 class Gameboard {
   constructor(rows, cols) {
     this.rows = rows;
@@ -5,6 +7,7 @@ class Gameboard {
     this.cells = this.initializeCells();
     this.ships = [];
     this.hits = [];
+    this.missedAttacks = [];
   }
   initializeCells() {
     let my2DArray = [];
@@ -16,16 +19,15 @@ class Gameboard {
     }
     return my2DArray;
   }
-
-  placeShip(ship, startRow, startCol, orientation) {
-    if (!this.isPlacementValid(ship, startRow, startCol, orientation)) {
+  placeShip(ship, startCol, startRow, orientation) {
+    if (!this.isPlacementValid(ship, startCol, startRow, orientation)) {
       console.error("Invalid ship placement!");
       return false;
     }
 
     for (let i = 0; i < ship.length; i++) {
-      let x = startRow;
-      let y = startCol;
+      let x = startCol;
+      let y = startRow;
 
       if (orientation === "horizontal") {
         x += i;
@@ -40,11 +42,10 @@ class Gameboard {
     this.ships.push(ship);
     return true;
   }
-
-  isPlacementValid(ship, startRow, startCol, orientation) {
+  isPlacementValid(ship, startCol, startRow, orientation) {
     for (let i = 0; i < ship.length; i++) {
-      let x = startRow;
-      let y = startCol;
+      let x = startCol;
+      let y = startRow;
 
       if (orientation === "horizontal") {
         x += i;
@@ -62,8 +63,26 @@ class Gameboard {
     }
     return true;
   }
+  receiveAttack(col, row) {
+    const target = this.cells[row][col];
 
-  receiveAttack(coordinate) {}
+    if (target != null && target != "miss" && target != "hit") {
+      target.hit();
+      this.hits.push({ col, row });
+      // Mark the cell as "hit" so it can't be hit again
+      this.cells[row][col] = "hit";
+      return true; // It was a hit
+    } else if (target === null) {
+      this.missedAttacks.push({ col, row });
+      this.cells[row][col] = "miss";
+      return false; // It was a miss
+    }
+    console.log("Already attacked this spot")
+    return false;
+  }
+  allShipsSunk() {
+    return this.ships.every((ship) => ship.isSunk());
+  }
 }
 
  export { Gameboard };

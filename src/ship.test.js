@@ -29,9 +29,3 @@ describe("Ship", () => {
     expect(ship.isSunk()).toBe(false); 
   });
 });
-
-// test('creates a ship with size four', () => {
-
-//   const ship = new Ship(4);
-//   expect(ship.size).toBe(4);
-// })

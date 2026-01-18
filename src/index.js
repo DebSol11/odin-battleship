@@ -15,3 +15,13 @@ gameBoard.placeShip(yacht, 0, 3, "vertical");
 
 console.log(gameBoard.cells[0][2]); // Should output the 'carrier' ship object
 console.log(gameBoard.cells);
+
+// try receiveAttackMethod() 
+gameBoard.receiveAttack(0, 3);
+gameBoard.receiveAttack(1, 3);
+gameBoard.receiveAttack(0, 4);
+gameBoard.receiveAttack(0, 5);
+gameBoard.receiveAttack(1, 3);
+
+console.log(gameBoard.missedAttacks)
+console.log(gameBoard.hits)
