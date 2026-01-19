@@ -12,5 +12,5 @@ class Ship {
   }
 }
 
-export { Ship };
+export {Ship};
 // module.exports = Ship;

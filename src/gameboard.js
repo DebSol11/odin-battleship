@@ -57,12 +57,14 @@ class Gameboard {
         return false;
       }
       // Check if the cell is already occupied by another ship
-      if (this.cells[y][x] !== null) {
+      // console.log(this.cells[y][x])
+      if (this.cells[y][x] != null) {
         return false;
       }
     }
     return true;
   }
+  
   receiveAttack(col, row) {
     const target = this.cells[row][col];
 
@@ -77,7 +79,7 @@ class Gameboard {
       this.cells[row][col] = "miss";
       return false; // It was a miss
     }
-    console.log("Already attacked this spot")
+    console.log("Already attacked this spot");
     return false;
   }
   allShipsSunk() {
@@ -85,5 +87,5 @@ class Gameboard {
   }
 }
 
- export { Gameboard };
+export {Gameboard};
 // module.exports = Gameboard;
